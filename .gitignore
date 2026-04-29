@@ -1,0 +1,7 @@
+venv/
+duckdb/
+__pycache__/
+*.pyc
+*.db
+.env
+airflow/logs/
