@@ -5,6 +5,15 @@ from pydantic import BaseModel
 
 app = FastAPI(title="Churn Prediction API")
 
+from fastapi.middleware.cors import CORSMiddleware
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 # Load model
 MODEL_PATH = "mlruns/1/models/m-19ac7d3b9a2444f8a60e8c1e252e80bb/artifacts"
 model = mlflow.xgboost.load_model(MODEL_PATH)
@@ -31,3 +40,5 @@ def predict(customer: Customer):
         "risk_level": risk,
         "recommendation": "Contact customer" if risk == "HIGH" else "Monitor only"
     }
+from fastapi.middleware.cors import CORSMiddleware
+
